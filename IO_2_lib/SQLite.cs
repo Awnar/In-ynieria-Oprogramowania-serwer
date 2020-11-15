@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
+using System.Text;
 
 namespace IO_2_lib
 {
@@ -20,7 +21,7 @@ namespace IO_2_lib
 
         public static int Login(string name, string pass)
         {
-            var user =_database.Users.FirstOrDefault(x => x.Name == name && x.Password == pass);
+            var user =_database.Users.FirstOrDefault(x => x.Name == name && x.Password == CreateMD5(pass));
             return user == null ? -1 : 1;
         }
 
@@ -34,7 +35,7 @@ namespace IO_2_lib
             _database.Users.Add(new User() 
             { 
                 Name = name,
-                Password = pass
+                Password = CreateMD5(pass)
             });
             _database.SaveChanges();
             return true;
@@ -94,6 +95,22 @@ namespace IO_2_lib
         public static void Disconnect()
         {
             con.Close();
+        }
+
+        private static string CreateMD5(string input)
+        {
+            using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
+            {
+                byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+                byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < hashBytes.Length; i++)
+                {
+                    sb.Append(hashBytes[i].ToString("X2"));
+                }
+                return sb.ToString();
+            }
         }
     }
 }
