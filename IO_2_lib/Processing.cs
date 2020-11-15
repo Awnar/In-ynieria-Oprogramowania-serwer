@@ -112,7 +112,7 @@ namespace IO_2_lib
                                 i++;
                                 for (; command.Count > i; i++)
                                     des += command[i] + " ";
-                                if (SQLite.AddJob(id, name, des))
+                                if (SQLite.AddTask(id, name, des))
                                     return "SUCCES";
                             }
                             else return "Login again";
@@ -126,10 +126,10 @@ namespace IO_2_lib
                             var id = VerifyKey(command[2], IP);
                             if (id >= 0)
                             {
-                                var res = SQLite.listJob(id);
+                                var res = SQLite.ListTasks(id);
                                 var str = "";
-                                foreach (object[] o in res)
-                                    str += o[0] + "\n\r";
+                                foreach (var task in res)
+                                    str += task.ToString() + "\n\r";
                                 return str.Trim();
                             }
                         }
@@ -142,10 +142,10 @@ namespace IO_2_lib
                             var id = VerifyKey(command[2], IP);
                             if (id >= 0)
                             {
-                                var res = SQLite.listJob(id);
+                                var res = SQLite.ListTasks(id);
                                 var str = "";
-                                foreach (object[] o in res)
-                                    str += o[0] + " " + o[1] + "\n\r";
+                                foreach (var task in res)
+                                    str += task.Name + "\n\r";
                                 return str.Trim();
                             }
                         }
@@ -159,10 +159,10 @@ namespace IO_2_lib
                             {
                                 try
                                 {
-                                    var res = SQLite.Job(int.Parse(command[3]), id);
+                                    var res = SQLite.GetTask(int.Parse(command[3]), id);
                                     if (res != null)
                                     {
-                                        var str = res[2] + "\n\r" + res[3];
+                                        var str = res.ToString();
                                         return str.Trim();
                                     }
                                 }
@@ -181,7 +181,7 @@ namespace IO_2_lib
                     case "VER":
                     case "V":
                         var v = Assembly.GetExecutingAssembly().GetName().Version;
-                        return string.Format(CultureInfo.InvariantCulture, "SERVER: {0}.{1}.{2} (r{3})\n\rDB: {4}", v.Major, v.Minor, v.Build, v.Revision, SQLite.Version());
+                        return string.Format(CultureInfo.InvariantCulture, "SERVER: {0}.{1}.{2} (r{3})\n\r", v.Major, v.Minor, v.Build, v.Revision);
 
                     default:
                         return "UNKNOWN COMMAND";
@@ -207,10 +207,10 @@ namespace IO_2_lib
         private static int VerifyKey(string key, string IP)
         {
             var res = SQLite.VerifyAuthKey(key);
-            if (res != null && IP == (string)res[1] && (DateTime)res[2] > DateTime.Now)
+            if (res != null && IP == res.LastAccessIP && res.Expiration > DateTime.Now)
             {
-                SQLite.UpdateAuthKey((int)res[0], key, IP);
-                return (int)res[0];
+                SQLite.UpdateAuthKey(res.UserId, key, IP);
+                return 1;
             }
             return -1;
         }

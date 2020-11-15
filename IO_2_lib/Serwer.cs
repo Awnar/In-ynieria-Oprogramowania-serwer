@@ -60,7 +60,7 @@ namespace IO_2_lib
         protected override void BeginDataTransmission(NetworkStream stream) { }
         public override void Start()
         {
-            SQLite.Init(@"Data Source = serwer.db");
+            SQLite.Init();
             StartListening();
             AcceptClient();
         }
