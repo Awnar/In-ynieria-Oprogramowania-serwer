@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IO_2", "IO_2\IO_2.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IO_2_lib", "IO_2_lib\IO_2_lib.csproj", "{8BAA216D-5950-45C5-AE53-F665212D3229}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IO_2_GUI_Server", "IO_2_GUI_Server\IO_2_GUI_Server.csproj", "{BB054D7F-4DD4-406D-A60C-B898AAE732DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8BAA216D-5950-45C5-AE53-F665212D3229}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BAA216D-5950-45C5-AE53-F665212D3229}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BAA216D-5950-45C5-AE53-F665212D3229}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB054D7F-4DD4-406D-A60C-B898AAE732DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB054D7F-4DD4-406D-A60C-B898AAE732DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB054D7F-4DD4-406D-A60C-B898AAE732DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB054D7F-4DD4-406D-A60C-B898AAE732DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

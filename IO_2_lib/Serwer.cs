@@ -22,6 +22,7 @@ namespace IO_2_lib
                 Stream = TcpClient.GetStream();
                 TransmissionDataDelegate transmissionDelegate = new TransmissionDataDelegate(BeginDataTransmission);
                 transmissionDelegate.BeginInvoke(Stream, ((IPEndPoint)TcpClient.Client.RemoteEndPoint).Address.ToString(), TransmissionCallback, TcpClient);
+                Logger.Info?.Invoke($"Nowe przychodzące połączenie");
                 //BeginDataTransmission(Stream, ((IPEndPoint)TcpClient.Client.RemoteEndPoint).Address.ToString());
             }
         }
@@ -49,8 +50,8 @@ namespace IO_2_lib
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("ERROR");
-                    Console.WriteLine(e.Message);
+                     Logger.Info?.Invoke("ERROR");
+                     Logger.Info?.Invoke(e.Message);
                     var dataOut = Encoding.UTF8.GetBytes("ERROR");
                     stream.Write(dataOut, 0, dataOut.Length);
                 }
@@ -60,9 +61,11 @@ namespace IO_2_lib
         protected override void BeginDataTransmission(NetworkStream stream) { }
         public override void Start()
         {
+            Logger.Info?.Invoke("Serwer wystartował");
             SQLite.Init();
             StartListening();
             AcceptClient();
+             Logger.Info?.Invoke("Koniec");
         }
 
         private void TransmissionCallback(IAsyncResult ar)

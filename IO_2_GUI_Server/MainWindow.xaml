@@ -1,0 +1,47 @@
+﻿<Window x:Class="IO_2_GUI_Server.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IO_2_GUI_Server"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Server" Height="501.782" Width="346.301">
+    <Grid Margin="20">
+        <StackPanel>
+            <TextBlock
+                Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                Port serwera
+            </TextBlock>
+            <TextBox 
+                Name="ServerPortTextBox"
+                PreviewTextInput="NumberValidationTextBox"
+                Margin="0,0,0,20"
+                >
+                9999
+            </TextBox>
+            <Button 
+                Margin="0,0,0,20"
+                Name="StartServerBtn" Click="StartServerBtn_Click"
+                materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding }"
+                materialDesign:ButtonProgressAssist.IsIndeterminate="True">
+                Start serwer
+            </Button>
+            <TextBlock
+                Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                Logi
+            </TextBlock>
+            <TextBox
+                IsReadOnly="True"
+                Name="LogsFromServerTextBox"
+                TextWrapping="Wrap"
+                VerticalAlignment="Stretch"
+                AcceptsReturn="True"
+                VerticalScrollBarVisibility="Auto"
+                materialDesign:HintAssist.Hint="Tu pojawią się logi z serwera"
+                Height="300">
+            </TextBox>
+        </StackPanel>
+
+    </Grid>
+</Window>

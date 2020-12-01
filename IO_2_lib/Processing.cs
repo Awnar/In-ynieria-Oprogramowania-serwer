@@ -73,10 +73,18 @@ namespace IO_2_lib
                         if (command.Count >= 4)
                         {
                             var ID = SQLite.Login(command[2], command[3]);
-                            if (ID <= 0) return "Zły login lub hasło\n\r";
+                            if (ID <= 0)
+                            {
+                                Logger.Info?.Invoke($"Użytkownik wpisał zły login lub hasło");
+                                return "Zły login lub hasło\n\r";
+                            }
+                            
                             var key = GetHash(SHA256.Create(), command[2] + DateTime.Now.ToString() + new Random().Next().ToString()).Substring(1, 6);//skracam token by nie trzeba było kopiować tak długiego ciągu
                             if (SQLite.UpdateAuthKey(ID, key, IP))
+                            {
+                                Logger.Info?.Invoke($"Użytkownik zalogował się w systemie");
                                 return key;
+                            }                               
                         }
                         return "ERROR";
 
@@ -85,6 +93,7 @@ namespace IO_2_lib
                         if (command.Count >= 4 && !SQLite.checkname(command[2]) && SQLite.Register(command[2], command[3]))
                         {
                             SQLite.AddAuthNullKey(command[2]);
+                            Logger.Info?.Invoke($"Zarejestrowano nowego użytkownika.");
                             return "Użytkownik dodany";
                         }
                         return "ERROR";
@@ -113,7 +122,11 @@ namespace IO_2_lib
                                 for (; command.Count > i; i++)
                                     des += command[i] + " ";
                                 if (SQLite.AddTask(id, name, des))
+                                {
+                                    Logger.Info?.Invoke($"Dodano task z nazwą: {name}");
                                     return "SUCCES";
+                                }
+                                    
                             }
                             else return "Login again";
                         }
@@ -130,6 +143,7 @@ namespace IO_2_lib
                                 var str = "";
                                 foreach (var task in res)
                                     str += task.ToString() + "\n\r";
+                                Logger.Info?.Invoke($"Pobrano wszystkie taski z bazy danych");
                                 return str.Trim();
                             }
                         }
@@ -163,6 +177,7 @@ namespace IO_2_lib
                                     if (res != null)
                                     {
                                         var str = res.ToString();
+                                        Logger.Info?.Invoke($"Użytkownik pobrał task z bazy");
                                         return str.Trim();
                                     }
                                 }
@@ -180,6 +195,7 @@ namespace IO_2_lib
                     case "VERSION":
                     case "VER":
                     case "V":
+                        Logger.Info?.Invoke($"Pobrano informacje o wersji");
                         var v = Assembly.GetExecutingAssembly().GetName().Version;
                         return string.Format(CultureInfo.InvariantCulture, "SERVER: {0}.{1}.{2} (r{3})\n\r", v.Major, v.Minor, v.Build, v.Revision);
 
