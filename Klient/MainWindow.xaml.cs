@@ -64,8 +64,11 @@ namespace Klient
         private void lista_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var tmp = lista.SelectedIndex;
-            name.Text = Jobs[tmp].name;
-            des.Text = Jobs[tmp].des;
+            if(tmp >= 0)
+            {
+                name.Text = Jobs[tmp].name;
+                des.Text = Jobs[tmp].des;
+            }
         }
     }
 }
