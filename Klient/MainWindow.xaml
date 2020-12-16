@@ -14,7 +14,7 @@
         <StackPanel>
             <Button 
                 Style="{StaticResource MaterialDesignFlatButton}" Margin="10,0,10,10"
-                x:Name="refresh" Content="Odśwież listę" Width="140" Height="25" Click="refresh_Click"/>
+                x:Name="refresh" Content="Odśwież listę"  Click="refresh_Click"/>
             <ListBox x:Name="lista" Margin="10" SelectionChanged="lista_SelectionChanged"/>
         </StackPanel>
         
