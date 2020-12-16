@@ -6,22 +6,29 @@
         xmlns:local="clr-namespace:Klient"
         mc:Ignorable="d"
         Title="MainWindow" Height="550" Width="800">
-    <Grid>
+    <Grid Margin="20">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="lista" Margin="10" SelectionChanged="lista_SelectionChanged"/>
+        <StackPanel>
+            <Button 
+                Style="{StaticResource MaterialDesignFlatButton}" Margin="10,0,10,10"
+                x:Name="refresh" Content="Odśwież listę" Width="140" Height="25" Click="refresh_Click"/>
+            <ListBox x:Name="lista" Margin="10" SelectionChanged="lista_SelectionChanged"/>
+        </StackPanel>
+        
         <StackPanel Grid.Column="1" Margin="10">
-            <Label Content="Nazwa zadania" Margin="0,40,0,0"/>
+            <TextBlock
+                Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                Text="Nazwa zadania" Margin="0,40,0,0"/>
             <TextBox x:Name="name"/>
-            <Label Content="Opis zadania" Margin="0,20,0,0"/>
+            <TextBlock 
+                Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                Text="Opis zadania" Margin="0,20,0,0"/>
             <TextBox x:Name="des" Height="200"/>
-            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
-                <Button x:Name="add" Content="Dodaj nowy" Width="140" Height="25" Click="add_Click"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
-                <Button x:Name="refresh" Content="Odśwież" Width="140" Height="25" Click="refresh_Click"/>
+            <StackPanel Orientation="Horizontal" Margin="0,20,20,20">
+                <Button x:Name="add" Content="Dodaj nowy" Click="add_Click"/>
             </StackPanel>
         </StackPanel>
     </Grid>

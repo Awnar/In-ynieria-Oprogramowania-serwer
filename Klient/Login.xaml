@@ -25,8 +25,8 @@
             <Label  Grid.Row="1" Content="Hasło" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBox x:Name="login" Grid.Column="1" HorizontalAlignment="Center" Width="100" VerticalAlignment="Center"/>
             <PasswordBox x:Name="pass" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Width="100" VerticalAlignment="Center"/>
-            <Button Content="Zarejestruj" Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="76" Click="Register_Click"/>
-            <Button Content="Zaoguj" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Click="Login_Click"/>
+            <Button Content="Zarejestruj" Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Click="Register_Click"/>
+            <Button Content="Zaloguj" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Login_Click"/>
         </Grid>
         <Label x:Name="error" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Visibility="Collapsed" Foreground="Red"/>
     </Grid>
