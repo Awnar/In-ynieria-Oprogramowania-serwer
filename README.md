@@ -4,5 +4,5 @@
 
 #### Proof of concept:
 
-<img src="Working.gif">
+<img src="Working2.gif">
 
