@@ -67,7 +67,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="SynchronousSocketClient.cs" />
+    <Compile Include="Job.cs" />
+    <Compile Include="SynchronousTCPClient.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>

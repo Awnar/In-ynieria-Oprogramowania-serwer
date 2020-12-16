@@ -15,7 +15,7 @@ namespace Klient
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            SynchronousSocketClient.Init();
+            SynchronousTCPClient.Init();
         }
 
     }

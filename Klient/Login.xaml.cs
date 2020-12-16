@@ -19,7 +19,6 @@ namespace Klient
     /// </summary>
     public partial class Login : Window
     {
-        MainWindow mainWindow = new MainWindow();
 
         public Login()
         {
@@ -28,9 +27,23 @@ namespace Klient
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            SynchronousSocketClient.Login(this.login.Text, this.pass.Password);
-            mainWindow.Show();
-            Close();
+            var answer = SynchronousTCPClient.Login(login.Text, pass.Password);
+            if (answer != null)
+            {
+                error.Visibility = Visibility.Visible;
+                error.Content = answer;
+            }
+            else
+            {
+                new MainWindow().Show();
+                Close();
+            }
+        }
+
+        private void Register_Click(object sender, RoutedEventArgs e)
+        {
+            error.Visibility = Visibility.Visible;
+            error.Content = SynchronousTCPClient.Register(login.Text, pass.Password);
         }
     }
 }

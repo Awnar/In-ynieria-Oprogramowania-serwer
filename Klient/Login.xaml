@@ -6,21 +6,28 @@
         xmlns:local="clr-namespace:Klient"
         mc:Ignorable="d"
         Title="Login" Height="250" Width="400">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Label Content="Login" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Label  Grid.Row="1" Content="Hasło" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBox x:Name="login" Grid.Column="1" HorizontalAlignment="Center" Width="100" VerticalAlignment="Center"/>
-        <PasswordBox x:Name="pass" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Width="100" VerticalAlignment="Center"/>
-        <Button Content="Zarejestruj" Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="76"/>
-        <Button Content="Zaoguj" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Click="Login_Click"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Content="Login" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label  Grid.Row="1" Content="Hasło" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox x:Name="login" Grid.Column="1" HorizontalAlignment="Center" Width="100" VerticalAlignment="Center"/>
+            <PasswordBox x:Name="pass" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Width="100" VerticalAlignment="Center"/>
+            <Button Content="Zarejestruj" Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="76" Click="Register_Click"/>
+            <Button Content="Zaoguj" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Click="Login_Click"/>
+        </Grid>
+        <Label x:Name="error" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Visibility="Collapsed" Foreground="Red"/>
     </Grid>
 </Window>
