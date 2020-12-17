@@ -226,7 +226,7 @@ namespace IO_2_lib
             if (res != null && IP == res.LastAccessIP && res.Expiration > DateTime.Now)
             {
                 SQLite.UpdateAuthKey(res.UserId, key, IP);
-                return 1;
+                return res.UserId;
             }
             return -1;
         }
