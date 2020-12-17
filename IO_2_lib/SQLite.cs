@@ -22,7 +22,7 @@ namespace IO_2_lib
         public static int Login(string name, string pass)
         {
             var user =_database.Users.FirstOrDefault(x => x.Name == name && x.Password == CreateMD5(pass));
-            return user == null ? -1 : 1;
+            return user == null ? -1 : user.Id;
         }
 
         public static bool checkname(string name)
