@@ -21,6 +21,12 @@ namespace Klient
             networkStream = tcpClient.GetStream();
         }
 
+        static public void Close()
+        {
+            tcpClient.Close();
+            key = null;
+        }
+
         static private string Send(string message)
         {
             var bits = Encoding.Default.GetBytes(message);

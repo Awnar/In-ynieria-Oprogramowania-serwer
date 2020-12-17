@@ -18,5 +18,9 @@ namespace Klient
             SynchronousTCPClient.Init();
         }
 
+        protected override void OnExit(System.Windows.ExitEventArgs e)
+        {
+            SynchronousTCPClient.Close();
+        }
     }
 }
