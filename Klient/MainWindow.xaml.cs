@@ -33,9 +33,9 @@ namespace Klient
             lista.Items.Clear();
             var tmp = SynchronousTCPClient.JobList();
             var answer = tmp.Split(new string[] { "\n\r" }, StringSplitOptions.RemoveEmptyEntries);
-            Jobs = new List<Job>(answer.Length/4);
-            for (int i = 0; i < answer.Length; i+=4)
-                Jobs.Add(Job.Parse(answer[i]+answer[i+1]+answer[i+2]));
+            Jobs = new List<Job>(answer.Length / 4);
+            for (int i = 0; i < answer.Length; i += 4)
+                Jobs.Add(Job.Parse(answer[i] + answer[i + 1] + answer[i + 2]));
 
             foreach (var item in Jobs)
                 lista.Items.Add(item.name);
@@ -64,11 +64,44 @@ namespace Klient
         private void lista_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var tmp = lista.SelectedIndex;
-            if(tmp >= 0)
+            if (tmp >= 0)
             {
                 name.Text = Jobs[tmp].name;
                 des.Text = Jobs[tmp].des;
             }
+        }
+
+        private void del_Click(object sender, RoutedEventArgs e)
+        {
+            var tmp = lista.SelectedIndex;
+            if (tmp >= 0)
+            {
+                if (SynchronousTCPClient.DelJob(Jobs[tmp].id))
+                    Refresh();
+                else
+                    MessageBox.Show("Operacja zakończona niepowodzeniem", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+                MessageBox.Show("Zaznacz pozycje", "Brak danych", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void update_Click(object sender, RoutedEventArgs e)
+        {
+            var tmp = lista.SelectedIndex;
+            if (tmp >= 0)
+            {
+                if (name.Text.Length > 0 && des.Text.Length > 0)
+                {
+                    if (SynchronousTCPClient.UpdateJob(Jobs[tmp].id, name.Text, des.Text))
+                        Refresh();
+                    else
+                        MessageBox.Show("Operacja zakończona niepowodzeniem", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                    MessageBox.Show("Uzupełnij nazwę i opis", "Brak danych", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+                MessageBox.Show("Zaznacz pozycje", "Brak danych", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

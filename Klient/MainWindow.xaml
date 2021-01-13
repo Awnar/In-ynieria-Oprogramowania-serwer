@@ -28,7 +28,9 @@
                 Text="Opis zadania" Margin="0,20,0,0"/>
             <TextBox x:Name="des" Height="200"/>
             <StackPanel Orientation="Horizontal" Margin="0,20,20,20">
-                <Button x:Name="add" Content="Dodaj nowy" Click="add_Click"/>
+                <Button x:Name="add" Content="Dodaj nowy" Click="add_Click" Margin="2"/>
+                <Button x:Name="del" Content="Usuń wpis" Click="del_Click" Margin="2"/>
+                <Button x:Name="update" Content="Aktualizuj wpis" Click="update_Click" Margin="2"/>
             </StackPanel>
         </StackPanel>
     </Grid>

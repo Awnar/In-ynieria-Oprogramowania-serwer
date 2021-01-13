@@ -189,6 +189,54 @@ namespace IO_2_lib
                         }
                         return "ERROR";
 
+                    case "DELJOB":
+                    case "DEL":
+                        if (command.Count >= 3)
+                        {
+                            var id = VerifyKey(command[2], IP);
+                            if (id >= 0)
+                            {
+                                SQLite.DelTask(int.Parse(command[3]), id);
+                                Logger.Info?.Invoke($"Usunięto wpis");
+                                return "SUCCES";
+                            }
+                        }
+                        return "ERROR";
+
+                    case "UPDATEJOB":
+                    case "UPDATE":
+                        if (command.Count >= 8)
+                        {
+                            /** 2 => key
+                             *  3 => 'name'
+                             *  3+n => nazwa
+                             *  3+n+1 => 'description'
+                             *  ... => description
+                             */
+                            var id = VerifyKey(command[2], IP);
+                            if (id >= 0)
+                            {
+                                string name = "";
+                                int i = 4;
+                                if (command[4].ToUpper() == "NAME")
+                                    while (++i < command.Count && command[i].ToUpper() != "DESCRIPTION" && command[i].ToUpper() != "DESCRIPT" && command[i].ToUpper() != "DES")
+                                        name += command[i] + " ";
+                                else return "ERROR";
+                                string des = "";
+                                i++;
+                                for (; command.Count > i; i++)
+                                    des += command[i] + " ";
+
+                                if (SQLite.UpdateTask(id, int.Parse(command[3]), name, des))
+                                {
+                                    Logger.Info?.Invoke($"Zaktualizowano task z nazwą: {name}");
+                                    return "SUCCES";
+                                }
+
+                            }
+                        }
+                        return "ERROR";
+
                     case "TIME":
                         return DateTime.Now.ToString();
 

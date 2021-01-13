@@ -65,6 +65,26 @@ namespace IO_2_lib
             return _database.Tasks.FirstOrDefault(x => x.Id == id && x.User.Id == user_ID);
         }
 
+        public static void DelTask(int id, int user_ID)
+        {
+            var task = _database.Tasks.FirstOrDefault(x => x.Id == id && x.User.Id == user_ID);
+            if (task == null)
+                return;
+            _database.Tasks.Remove(task);
+        }
+
+        public static bool UpdateTask(int user_ID, int id, string name, string description)
+        {
+            var task = _database.Tasks.FirstOrDefault(x => x.Id == id && x.User.Id == user_ID);
+            if (task == null)
+                return false;
+
+            task.Description = description;
+            task.Name = name;
+            _database.SaveChanges();
+            return true;
+        }
+
         public static AuthKey VerifyAuthKey(string key)
         {
             return _database.AuthKeys.FirstOrDefault(x => x.Key == key);

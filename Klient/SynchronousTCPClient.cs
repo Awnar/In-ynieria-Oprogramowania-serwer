@@ -41,7 +41,7 @@ namespace Klient
 
             } while (networkStream.DataAvailable);
 
-            return data.ToString();
+            return data.ToString().Trim();
         }
 
         static public string Login(string name, string pass)
@@ -77,9 +77,29 @@ namespace Klient
             if (key == null)
                 return "Nie jesteś zalogowany";
             var answer = Send("ADD " + key+ " NAME "+name+" DES "+descryption).Replace("\n\r", " ");
-            if (answer != "SUCCES")
+            if (answer == "SUCCES")
                 return null;
             return answer;
+        }
+
+        static public bool DelJob(int id)
+        {
+            if (key == null)
+                return false;
+            var answer = Send("DEL " + key + " " + id).Replace("\n\r", " ");
+            if (answer != "SUCCES")
+                return false;
+            return true;
+        }
+
+        static public bool UpdateJob(int id, string name, string descryption)
+        {
+            if (key == null)
+                return false;
+            var answer = Send("UPDATE " + key +" "+ id + " NAME " + name + " DES " + descryption).Replace("\n\r", " ");
+            if (answer != "SUCCES")
+                return false;
+            return true;
         }
     }
 }
