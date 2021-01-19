@@ -15,7 +15,14 @@ namespace Klient
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            SynchronousTCPClient.Init();
+            try
+            {
+                SynchronousTCPClient.Init();
+            } catch(Exception)
+            {
+                MessageBox.Show("Nie udało się nawiązać połączenia z serwerem", "MyTask", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Environment.Exit(1);
+            }
         }
 
         protected override void OnExit(System.Windows.ExitEventArgs e)
