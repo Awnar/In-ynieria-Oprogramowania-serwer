@@ -50,7 +50,9 @@ namespace IO_2_lib
             user.Tasks.Add(new Task()
             {
                 Name = name,
-                Description = description
+                Description = description,
+                CreateTime = DateTime.Now,
+                UpdateTime = DateTime.Now
             });
             _database.SaveChanges();
             return true;
@@ -81,6 +83,7 @@ namespace IO_2_lib
 
             task.Description = description;
             task.Name = name;
+            task.UpdateTime = DateTime.Now;
             _database.SaveChanges();
             return true;
         }

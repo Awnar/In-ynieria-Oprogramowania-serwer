@@ -15,12 +15,18 @@ namespace IO_2_lib.Models
         public string Description { get; set; }
         public virtual User User { get; set; }
 
+        public DateTime CreateTime { get; set; }
+        public DateTime UpdateTime { get; set; }
+
+
         public override string ToString()
         {
             return $"{nameof(Id)}:{Id} \n\r" +
                  $"{nameof(Name)}:{Name} \n\r" +
                  $"{nameof(Description)}:{Description} \n\r" +
-                 $"User Id: {User.Id} \n\r";
+                 $"User Id: {User.Id} \n\r"+
+                 $"{nameof(CreateTime)}:{CreateTime} \n\r" +
+                 $"{nameof(UpdateTime)}:{UpdateTime} \n\r";
         }
     }
 }

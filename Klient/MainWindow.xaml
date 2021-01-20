@@ -27,6 +27,14 @@
                 Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
                 Text="Opis zadania" Margin="0,20,0,0"/>
             <TextBox x:Name="des" Height="200"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="2">Data utworzenia: </TextBlock>
+                <TextBlock x:Name="CreateTime" Margin="2"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="2">Data modyfikacji: </TextBlock>
+                <TextBlock x:Name="UpdateTime" Margin="2"/>
+            </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,20,20,20">
                 <Button x:Name="add" Content="Dodaj nowy" Click="add_Click" Margin="2"/>
                 <Button x:Name="del" Content="Usuń wpis" Click="del_Click" Margin="2"/>

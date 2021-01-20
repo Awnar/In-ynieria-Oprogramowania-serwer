@@ -33,17 +33,17 @@ namespace Klient
             lista.Items.Clear();
             var tmp = SynchronousTCPClient.JobList();
             var answer = tmp.Split(new string[] { "\n\r" }, StringSplitOptions.RemoveEmptyEntries);
-            Jobs = new List<Job>(answer.Length / 4);
-            for (int i = 0; i < answer.Length; i += 4)
-                Jobs.Add(Job.Parse(answer[i] + answer[i + 1] + answer[i + 2]));
+            Jobs = new List<Job>(answer.Length / 6);
+            for (int i = 0; i < answer.Length; i += 6)
+                Jobs.Add(Job.Parse(answer[i] + answer[i + 1] + answer[i + 2] + answer[i + 4] + answer[i + 5]));
 
             foreach (var item in Jobs)
-                lista.Items.Add(item.name);
+                lista.Items.Add(item.Name);
         }
 
         private void refresh_Click(object sender, RoutedEventArgs e)
         {
-            name.Text = des.Text = "";
+            name.Text = des.Text = CreateTime.Text = UpdateTime.Text = "";
             Refresh();
         }
 
@@ -66,8 +66,10 @@ namespace Klient
             var tmp = lista.SelectedIndex;
             if (tmp >= 0)
             {
-                name.Text = Jobs[tmp].name;
-                des.Text = Jobs[tmp].des;
+                name.Text = Jobs[tmp].Name;
+                des.Text = Jobs[tmp].Description;
+                CreateTime.Text = Jobs[tmp].CreateTime;
+                UpdateTime.Text = Jobs[tmp].UpdateTime;
             }
         }
 
@@ -76,7 +78,7 @@ namespace Klient
             var tmp = lista.SelectedIndex;
             if (tmp >= 0)
             {
-                if (SynchronousTCPClient.DelJob(Jobs[tmp].id))
+                if (SynchronousTCPClient.DelJob(Jobs[tmp].Id))
                     Refresh();
                 else
                     MessageBox.Show("Operacja zakończona niepowodzeniem", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -92,7 +94,7 @@ namespace Klient
             {
                 if (name.Text.Length > 0 && des.Text.Length > 0)
                 {
-                    if (SynchronousTCPClient.UpdateJob(Jobs[tmp].id, name.Text, des.Text))
+                    if (SynchronousTCPClient.UpdateJob(Jobs[tmp].Id, name.Text, des.Text))
                         Refresh();
                     else
                         MessageBox.Show("Operacja zakończona niepowodzeniem", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
