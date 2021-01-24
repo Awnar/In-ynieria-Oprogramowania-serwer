@@ -12,7 +12,8 @@ namespace IO_2_Lib.Tests
     {
         private DatabaseContext _database;
         private User _testUser;
-        private string _userPassword;
+        private const string _testUserName = "testUser";
+        private const string _testUserPassword = "testPass";
 
         [TestInitialize]
         public void TestInitialize()
@@ -21,7 +22,7 @@ namespace IO_2_Lib.Tests
             _database = new DatabaseContext();
             _database.Database.EnsureCreated();
             SQLite.Init(_database);
-            _userPassword = "TestPassword";
+
             PopulateWithTestData();
             _testUser = GetTestUser();
         }
@@ -39,7 +40,7 @@ namespace IO_2_Lib.Tests
         [TestMethod]
         public void Login_InputIsCorrect_ReturnUserId()
         {
-            var resultFromMethod = SQLite.Login(_testUser.Name, _userPassword);
+            var resultFromMethod = SQLite.Login(_testUser.Name, _testUserPassword);
             var userFromDb = _database.Users.FirstOrDefault(x => x.Name == _testUser.Name && x.Password == _testUser.Password);
 
             Assert.AreEqual(resultFromMethod, userFromDb.Id);
@@ -53,7 +54,7 @@ namespace IO_2_Lib.Tests
         }
 
         [DataTestMethod]
-        [DataRow("TestUser", true)]
+        [DataRow(_testUserName, true)]
         [DataRow("NonExisting", false)]
         public void CheckName_UsernameGiven_ReturnBool(string userName, bool exists)
         {
@@ -111,8 +112,8 @@ namespace IO_2_Lib.Tests
             var user = new User()
             {
                 Id = 1,
-                Name = "TestUser",
-                Password = CreateMD5(_userPassword)
+                Name = _testUserName,
+                Password = CreateMD5(_testUserPassword)
             };
 
             user.AuthKey = new AuthKey()
