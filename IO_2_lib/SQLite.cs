@@ -7,7 +7,7 @@ using System.Text;
 
 namespace IO_2_lib
 {
-    class SQLite
+    public class SQLite
     {
         static DatabaseContext _database;
         static SQLiteConnection con;
@@ -17,6 +17,11 @@ namespace IO_2_lib
         {
             _database = new DatabaseContext();
             _database.Database.EnsureCreated();
+        }
+
+        public static void Init(DatabaseContext databaseContext)
+        {
+            _database = databaseContext;
         }
 
         public static int Login(string name, string pass)
@@ -93,6 +98,7 @@ namespace IO_2_lib
         {
             return _database.AuthKeys.FirstOrDefault(x => x.Key == key);
         }
+
         public static bool UpdateAuthKey(int id, string key, string ip)
         {
             var user = _database.Users.Find(id);

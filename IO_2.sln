@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Klient", "Klient\Klient.csp
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "InstalatorKlienta", "InstalatorKlienta\InstalatorKlienta.vdproj", "{759D0003-7460-4A31-8CA2-EF8F0D2FEB3A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IO_2_Lib.Tests", "IO_2_Lib.Tests\IO_2_Lib.Tests.csproj", "{247369AC-4A2F-4847-8DEC-143262DDAABD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{26973BB2-97C6-4607-8476-7DDB31AD2085}.Release|Any CPU.Build.0 = Release|Any CPU
 		{759D0003-7460-4A31-8CA2-EF8F0D2FEB3A}.Debug|Any CPU.ActiveCfg = Debug
 		{759D0003-7460-4A31-8CA2-EF8F0D2FEB3A}.Release|Any CPU.ActiveCfg = Release
+		{247369AC-4A2F-4847-8DEC-143262DDAABD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{247369AC-4A2F-4847-8DEC-143262DDAABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{247369AC-4A2F-4847-8DEC-143262DDAABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{247369AC-4A2F-4847-8DEC-143262DDAABD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
