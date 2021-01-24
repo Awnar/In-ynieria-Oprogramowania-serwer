@@ -73,6 +73,7 @@ namespace IO_2_lib
             if (task == null)
                 return;
             _database.Tasks.Remove(task);
+            _database.SaveChanges();
         }
 
         public static bool UpdateTask(int user_ID, int id, string name, string description)
