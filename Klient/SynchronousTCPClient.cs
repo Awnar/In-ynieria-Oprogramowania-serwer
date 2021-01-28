@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Klient
 {
@@ -41,7 +37,10 @@ namespace Klient
 
             } while (networkStream.DataAvailable);
 
-            return data.ToString().Trim();
+            var tmp = data.ToString().Trim();
+
+            if (tmp == "ERROR") throw new Exception();
+            return tmp;
         }
 
         static public string Login(string name, string pass)

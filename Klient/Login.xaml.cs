@@ -27,16 +27,23 @@ namespace Klient
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            var answer = SynchronousTCPClient.Login(login.Text, pass.Password);
-            if (answer != null)
+            try
             {
-                error.Visibility = Visibility.Visible;
-                error.Content = answer;
+                var answer = SynchronousTCPClient.Login(login.Text, pass.Password);
+                if (answer != null)
+                {
+                    error.Visibility = Visibility.Visible;
+                    error.Content = answer;
+                }
+                else
+                {
+                    new MainWindow().Show();
+                    Close();
+                }
             }
-            else
+            catch (Exception)
             {
-                new MainWindow().Show();
-                Close();
+                MessageBox.Show("Błąd z połączeniem, proszę spróbować zalogować się za jakiś czas.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
